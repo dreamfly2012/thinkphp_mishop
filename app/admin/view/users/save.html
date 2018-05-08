@@ -1,0 +1,49 @@
+{extend name="common/base" /}
+{block name="title"}编辑会员{/block}
+{block name="main"}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>会员管理 > <a href="/admin/users">会员列表</a> > 编辑会员</h5>
+                        <div class="nav navbar-right panel_toolbox">
+                            <a href="/admin/users"><i class="fa fa-list"></i> 返回</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form id="myForm" class="form-horizontal form-label-left" data-url="/admin/users/save" onsubmit="return false">
+                            <!--demo-form2-->
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">会员昵称</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">{$users.username} {$users.nickname}</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">是否禁用</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label>
+                                        <input name="status" type="checkbox" class="js-switch" data-switchery="true" {eq name='$users.status' value='1'}checked {/eq} style="display: none;" value="1">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <input type="hidden" name="id" value="{$users.id}">
+                                    <button class="btn btn-success submits">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

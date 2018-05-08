@@ -1,0 +1,125 @@
+{extend name="common/base" /}
+{block name="title"}个人中心｜{$SiteaName}{__block__}{/block}
+{block name="content"}
+<link rel="stylesheet" href="/index/css/main.min.css">
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="/">首页</a>
+        <span class="sep">&gt;</span>
+        <span>个人中心</span>
+    </div>
+</div>
+<div class="page-main user-main">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="uc-box uc-sub-box">
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">个人中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li class="active">
+                                    <a href="/user.shtml">个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="/user/address.shtml">收货地址</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">订单中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li>
+                                    <a href="/user/order.shtml">我的订单</a>
+                                </li>
+
+                                <li>
+                                    <a href="/user/comment/">评价晒单</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span16">
+                <div class="protal-content-update hide">
+                    <div class="protal-username">
+                        Hi, {$Think.session.users.username}        </div>
+                    <p class="msg">我们做了一个小升级：你的用户名可以直接修改啦，去换个酷炫的名字吧。<a href="https://account.xiaomi.com/pass/auth/profile/home" target="_blank" data-stat-id="6a46bbf47a36e840" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-6a46bbf47a36e840', 'https://account.xiaomi.com/pass/auth/profile/home', 'pcpid', '']);"> 立即前往&gt;</a></p>
+                </div>
+                <div class="uc-box uc-main-box">
+                    <div class="uc-content-box portal-content-box">
+                        <div class="box-bd">
+                            <div class="portal-main clearfix">
+                                <div class="user-card">
+                                    <h2 class="username">{$Think.session.users.username}</h2>
+                                    <p class="tip"></p>
+                                    <!--<a class="link" href="https://account.xiaomi.com/pass/userInfo" target="_blank">修改个人信息 &gt;</a>-->
+                                    <img class="avatar" src="{$Think.session.users.headimgurl}" width="150" height="150" alt="{$Think.session.users.username}">
+                                </div>
+                                <div class="user-actions">
+                                    <ul class="action-list">
+                                        <li>账户安全：<span class="level level-2">普通</span></li>
+                                        <li>绑定手机：<span class="tel">{notempty name='$user.mobile'}{$user.mobile}{else /} 未绑定 {/notempty}</span></li>
+                                        <li>绑定邮箱：<span class="tel">{notempty name='$user.email'}{$user.email}{else /} 未绑定 {/notempty}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="portal-sub">
+                                <ul class="info-list clearfix">
+                                    <li>
+                                        <h3>待支付的订单：<span class="num">{$order_status_0}</span></h3>
+                                        <a href="/user/order.shtml?type=0" data-stat-id="388b7abd61743dc1">查看待支付订单<i class="iconfont"></i></a>
+                                        <img src="//s01.mifile.cn/i/user/portal-icon-1.png">
+                                    </li>
+                                    <li>
+                                        <h3>待收货的订单：<span class="num">{$order_status_3}</span></h3>
+                                        <a href="/user/order.shtml?type=3" data-stat-id="f0cab468913931be">查看待收货订单<i class="iconfont"></i></a>
+                                        <img src="//s01.mifile.cn/i/user/portal-icon-2.png" alt="">
+                                    </li>
+                                    <li>
+                                        <h3>待评价商品数：<span class="num">{$order_status_6}</span></h3>
+                                        <a href="http://order.mi.com/user/comment?filter=1&amp;r=80907.1524723359" data-stat-id="f6211467c5980393" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-f6211467c5980393', 'http://order.mi.com/user/commentfilter=1&amp;r=80907.1524723359', 'pcpid', '']);">查看待评价商品<i class="iconfont"></i></a>
+                                        <img src="//s01.mifile.cn/i/user/portal-icon-3.png" alt="">
+                                    </li>
+                                    <li>
+                                        <h3>喜欢的商品：<span class="num">0</span></h3>
+                                        <a href="http://order.mi.com/user/favorite?r=80907.1524723359" data-stat-id="dd602c6976121614" onclick="_msq.push(['trackEvent', '45a270e10b1f8e93-dd602c6976121614', 'http://order.mi.com/user/favoriter=80907.1524723359', 'pcpid', '']);">查看喜欢的商品<i class="iconfont"></i></a>
+                                        <img src="//s01.mifile.cn/i/user/portal-icon-4.png" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script>
+    $(function () {
+        var now = new Date(),hour = now.getHours(),t = '';
+        if(hour < 6){t += "凌晨好！"}
+        else if (hour < 9){t = "早上好！"}
+        else if (hour < 12){t ="上午好！"}
+        else if (hour < 14){t = "中午好！"}
+        else if (hour < 17){t = "下午好！"}
+        else if (hour < 19){t = "傍晚好！"}
+        else if (hour < 22){t = "晚上好！"}
+        else {t = "夜里好！"};
+        $('p.tip').html(t);
+
+    });
+</script>
+{/block}}

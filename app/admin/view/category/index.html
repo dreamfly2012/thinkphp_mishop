@@ -1,0 +1,87 @@
+{extend name="common/base"}
+{block name="title"}商品分类{/block}
+{block name="main"}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>商品 > 商品分类</h5>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="clearfix" style="padding-bottom: 10px;">
+                            <a href="/admin/category/add" class="btn btn-sm btn-primary">
+                                <i class="fa fa-save"></i>
+                                添加
+                            </a>
+                        </div>
+                        <form id="myForm">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="50" style="text-align: center;"><i class="fa fa-star-half-full"></i></th>
+                                    <th>ID</th>
+                                    <th>分类名称</th>
+                                    <th>分类别名</th>
+                                    <th>分类图片</th>
+                                    <th>状态</th>
+                                    <th>是否推荐</th>
+                                    <th>排序</th>
+                                    <th>创建时间</th>
+                                    <th>操作 </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="list"}
+                                <tr>
+                                    <td colspan="8" align="center">对不起，没有查询到任何相关结果！</td>
+                                </tr>
+                                {else /}
+                                {volist name="list" id="vo"}
+                                <tr class="parent_id_{$vo.pid}" {neq name="$vo.pid" value="0" }style="display: none;"{/neq}>
+
+                                    <td align="center">
+                                        {neq name="$vo.pid" value="0" }
+                                            {notempty name="$vo.level"}<i class="fa fa-plus tree" tree_id="{$vo['id']}"></i>{/notempty}
+                                        {else/}
+                                            {notempty name="$vo.level"}<i class="fa fa-plus tree" tree_id="{$vo['id']}"></i>{else /}<i class="fa fa-minus"></i>{/notempty}
+                                        {/neq}
+                                    </td>
+                                    <td scope="row" class="id">{$vo.id}</td>
+                                    <td>
+                                        {$vo.html}{$vo.name}
+                                    </td>
+                                    <td>
+                                        {$vo.m_name}
+                                    </td>
+                                    <td align="center"><img src="{$vo.catepic}" width="40"></td>
+                                    <td>
+                                        <i class="fa {eq name='$vo.isshow' value='1'}fa-check-circle{else /}fa-times-circle{/eq}"></i>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        {eq name='$vo.hot' value='1'}<i class="fa fa-check-circle"></i>{else /} <i class="fa fa-times-circle"></i>{/eq}
+                                    </td>
+                                    <td>{$vo.sort}</td>
+                                    <td>{$vo.time|date="Y-m-d H:i:s", ###}</td>
+                                    <td>
+                                        <a href="/admin/category/add/id/{$vo.id}" class="btn btn-success btn-outline btn-xs"><i class="fa fa-pencil-square-o"></i>添加子类</a>
+                                        <a href="/admin/category/save/id/{$vo.id}" class="btn btn-info btn-xs "><i class="fa fa-pencil"></i> 编辑 </a>
+                                        <a data-url="/admin/category/del/id/{$vo.id}" class="btn btn-danger btn-xs action-delete"><i class="fa fa-trash-o"></i> 删除 </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{/block}

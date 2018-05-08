@@ -1,0 +1,104 @@
+{extend name="common/base" /}
+{block name="title"}编辑分类{/block}
+{block name="main"}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>商品 > <a href="/admin/category">商品分类</a> > 编辑分类</h5>
+                        <div class="nav navbar-right panel_toolbox">
+                            <a href="/admin/category"><i class="fa fa-list"></i> 返回</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form id="myForm" class="form-horizontal form-label-left" data-url="/admin/category/save" onsubmit="return false">
+                            <!--demo-form2-->
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">分类名称</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12" placeholder="分类名称" name="name" value="{$cate.name}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">分类别名</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12" placeholder="分类名称" name="m_name" value="{$cate.m_name}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">分类展示图片</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-sm-12 imgFile" style="padding-left: 0; margin-bottom: 4px;">
+                                        <input class="form-control file-img" name="catepic" placeholder="网站Logo" style="text-indent: 1.5rem;" value="{$cate.catepic}">
+                                        <i class="fa fa-picture-o imgFile-ico" style="padding-left: 5px;" onmouseover="mouseover(this)" onmouseout="layer.closeAll();"></i>
+                                        <span class="imgpicker">
+                                            <span class="uploader-text">选择上传…</span>
+                                            <input type="file" class="file-invisible file-category" name="image" accept="image/jpg,image/jpeg,image/png">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">默认排序</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12" value="100" name="sort" value="{$cate.sort}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">是否显示</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div>
+                                        <label>
+                                            <input name="isshow" type="checkbox" class="js-switch" {eq name="$cate.isshow" value="1"}checked{/eq} data-switchery="true" value="1" style="display: none;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">是否推荐</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div>
+                                        <label>
+                                            <input name="hot" type="checkbox" class="js-switch" {eq name="$cate.hot" value="1"}checked{/eq} data-switchery="true" value="1" style="display: none;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">背景</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div>
+                                        <label>
+                                            <input name="color" type="checkbox" class="js-switch" {eq name="$cate.color" value="1"}checked{/eq} data-switchery="true" value="1" style="display: none;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <input type="hidden" name="pid" value="{$cate.pid}">
+                                    <input type="hidden" name="id" value="{$cate.id}">
+                                    {:token()}
+                                    <button class="btn btn-success submits">确认提交</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

@@ -1,0 +1,104 @@
+{extend name="common/base"}
+{block name="title"}会员管理{/block}
+{block name="main"}
+<style>
+    a.BrandLogo {
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        width: 100px;
+        overflow: hidden;
+        border: 1px solid transparent;
+        float: left;
+        cursor: pointer;
+    }
+    a.BrandLogo:hover {
+        border-color: #ff0036;
+        color: #ff0036;
+        background: #fff;
+    }
+    a.BrandLogo:hover img {
+        display: none;
+    }
+    i.fa.fa-qq {
+        margin-left: 10px;
+        color: #337ab7;
+    }
+    span.in-is {
+        padding: .2rem .9rem;
+        border-radius: .1rem;
+        color: #fff;
+        font-weight: bold;
+    }
+    span.in-is.danger {
+        background: #4ca6ff;
+    }
+    span.in-is.demo {
+        background: #ff4c6a;
+    }
+</style>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>会员管理 > 会员列表</h5>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="clearfix" style="padding-bottom: 10px;">
+                        </div>
+                        <form id="myForm">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="50" style="text-align: center;"><i class="fa fa-star-half-full"></i></th>
+                                    <th>ID</th>
+                                    <th>会员昵称</th>
+                                    <th>邮件地址</th>
+                                    <th>手机号码</th>
+                                    <th>注册时期</th>
+                                    <th>用户状态</th>
+                                    <th>操作 </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="users"}
+                                <tr>
+                                    <td colspan="9" align="center">对不起，没有查询到任何相关结果！</td>
+                                </tr>
+                                {else /}
+                                {volist name="users" id="vo"}
+                                <tr>
+                                    <td align="center"><i class="fa fa-star"></i></td>
+                                    <td scope="row">{$vo.id}</td>
+                                    <td>{$vo.username} {$vo.nickname} {notempty name="$vo.nickname"}<sub><i class="fa fa-qq"></i></sub>{/notempty}</td>
+                                    <td>{$vo.email}</td>
+                                    <td>{$vo.mobile}</td>
+                                    <td>
+                                       {$vo.create_time|date="Y-m-d H:i:s",###}
+                                    </td>
+                                    <td>{eq name='$vo.status' value='2'}<span class="in-is demo"> 禁用 </span>{else /} <span class="in-is danger"> 启用 </span>{/eq}</td>
+                                    <td>
+                                        <a href="/admin/users/save/id/{$vo.id}" class="btn btn-info btn-xs "><i class="fa fa-pencil"></i> 编辑 </a>
+                                        <a data-url="/admin/users/del/id/{$vo.id}" class="btn btn-danger btn-xs action-delete"><i class="fa fa-trash-o"></i> 删除 </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                            <div class="paginationcentent">
+                                {$users->render()}
+                            </div>
+                            {/empty}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{/block}

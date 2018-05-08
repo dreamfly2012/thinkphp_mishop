@@ -1,0 +1,49 @@
+{extend name="common/base" /}
+{block name='title'}修改昵称{/block}
+{block name="main"}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>用户管理 > 修改昵称 </h5>
+                        <div class="nav navbar-right panel_toolbox">
+                            <a href=""><i class="fa fa-list"></i> 返回</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form id="myForm" class="form-horizontal form-label-left" data-url="/admin/user/userinfo" onsubmit="return false">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">昵称</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {$Think.session.user.username}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">新昵称</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12" placeholder="新昵称" name="username">
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    {:token()}
+                                    <button class="btn btn-success submits">确认提交</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

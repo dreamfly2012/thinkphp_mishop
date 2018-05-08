@@ -1,7 +1,13 @@
 ## 简介 ##
 > `mi v1.0.0` 是基于Thinkphp 5 防小米官网商城系统.
 ## 效果图 ##
-## demo　##
+![](http://yun.topthink.com/Uploads/Editor/2018-05-08/5af1636e92f0a.jpg)
+![](http://yun.topthink.com/Uploads/Editor/2018-05-08/5af1639888a88.jpg)
+![](http://yun.topthink.com/Uploads/Editor/2018-05-08/5af163ab6c3d2.jpg)
+![](http://yun.topthink.com/Uploads/Editor/2018-05-08/5af163be0ab46.jpg)
+![](http://yun.topthink.com/Uploads/Editor/2018-05-08/5af163d4dde7f.jpg)
+
+## demo ##
 演示地址：[http://www.xiaoxiang.ga](http://www.xiaoxing.ga)
 <br />
 后台登录演示 :[http://www.xiaoxiang.ga/admin](http://www.xiaoxiang.ga/admin)

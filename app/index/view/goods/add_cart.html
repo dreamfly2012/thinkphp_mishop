@@ -1,0 +1,90 @@
+ <style>
+        .ui-dialog-content {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            text-align: left;
+        }
+        #addCartBox .colect-top {
+            width: 150px;
+            height: auto;
+            margin:0 auto;
+            margin-bottom: 21px;
+            border-bottom: none;
+        }
+        @font-face {
+            font-family: 'iconfont';  /* project id 636503 */
+            src: url('/index/font/iconfont.eot');
+            src: url('/index/font/iconfont.eot?#iefix') format('embedded-opentype'),
+            url('/index/font/iconfont.woff') format('woff'),
+            url('/index/font/iconfont.ttf') format('truetype'),
+            url('/index/font/iconfont.svg#iconfont') format('svg');
+        }
+        .iconfont{
+            font-family:"iconfont" !important;
+            font-size:16px;font-style:normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        i.icon.iconfont {
+            font-size: 42px;
+            float: left;
+            margin: 10px;
+            color: #ff6700;
+            -webkit-transition: font-size 0.25s ease-out 0s;
+            -moz-transition: font-size 0.25s ease-out 0s;
+            transition: font-size 0.25s ease-out 0s;
+        }
+        .conect-title {
+            line-height: 65px;
+            padding-left: 80px;
+        }
+        .conect-title span {
+            font-size: 14px;
+            font-weight: 700;
+        }
+         .add-cart-btn {
+             width: 170px;
+             margin: 0 auto;
+        }
+
+        .add-cart-btn a {
+            float: left;
+            padding: 2px 10px;
+            font: 16px Microsoft YaHei;
+            line-height: 38px;
+            text-align: center;
+            border: 1px solid #ff6700;
+            color: #ff6700;
+        }
+        a{
+            text-decoration: none;
+        }
+
+        a.ui-button.ui-button-122.fl {
+            margin-left: 10px;
+        }
+        .add-cart-btn a:hover{
+            color: #fff;
+            background-color: #ff6700;
+        }
+    </style>
+</head>
+<body>
+<div i="content" class="ui-dialog-content" id="content:1459321729418" style="width: 450px; height: auto;">
+    <div id="addCartBox" class="collect-public" style="display: block;">
+        <div class="colect-top"> <i class="icon iconfont">&#xe770;</i>
+            <!--<i class="colect-fail"></i>-->
+            <div class="conect-title">
+                <span>添加成功</span>
+            </div>
+        </div>
+        <div class="add-cart-btn fn-clear">
+
+            <a href="javascript:;" onclick="javascript:parent.layer.closeAll('iframe');" class="ui-button ui-button-f80 fl go-shopping">继续购物</a>
+
+            <a href="/cart/index.shtml" target="_parent" class="ui-button ui-button-122 fl">去结算</a>
+        </div>
+    </div>
+</div>

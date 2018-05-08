@@ -1,0 +1,200 @@
+{extend name="common/base"}
+{block name="title"}订单详情{/block}
+{block name="main"}
+<style>
+    .ncap-order-details {
+        border: solid 1px #e6e9ed;
+        position: relative;
+        z-index: 1;
+    }
+    .ncap-order-details {
+        width: 1000px;
+        margin: 0 auto;
+    }
+    .ncap-order-details .tabs-panels {
+        padding: 9px 19px;
+    }
+    .ncap-order-details .misc-info, .ncap-order-details .addr-note, .ncap-order-details .contact-info {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: solid 1px #E6E6E6;
+    }
+    h3{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .ncap-order-details .tabs-panels dl {
+        font-size: 0;
+        padding-bottom: 5px;
+    }
+    .ncap-order-details .tabs-panels dt, .ncap-order-details .tabs-panels dd {
+        font-size: 12px;
+        line-height: 20px;
+        vertical-align: top;
+        display: inline-block;
+    }
+    .ncap-order-details .tabs-panels dt {
+        color: #999;
+        width: 100px;
+        text-align: right;
+    }
+    .ncap-order-details .tabs-panels dd {
+        color: #333;
+        min-width: 200px;
+    }
+    .ncap-order-details table {
+        border: solid 1px #D7D7D7;
+        width: 100%;
+    }
+    .ncap-order-details table thead th {
+        border-bottom: solid 1px #D7D7D7;
+    }
+    .ncap-order-details table thead th, .ncap-order-details table tbody td {
+        text-align: center;
+        min-height: 20px;
+        padding: 9px;
+    }
+    .ncap-order-details table .goods-thumb {
+        width: 30px;
+        height: 30px;
+    }
+    .ncap-order-details table .goods-thumb a img {
+        max-width: 30px;
+        max-height: 30px;
+    }
+</style>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>订单管理 > <a href="/admin/orders">订单列表</a> > 订单详情</h5>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="clearfix" style="padding-bottom: 10px;"></div>
+                        <div class="ncap-order-details">
+                            <form id="order-action">
+                                <div class="tabs-panels">
+                                    <div class="misc-info">
+                                        <h3>订单详情</h3>
+                                        <dl>
+                                            <dt>订单号：</dt>
+                                            <dd>{$data.order_sn}</dd>
+                                            <dt>下单时间：</dt>
+                                            <dd>{$data.order_time|date='Y-m-d H:i:s',###}</dd>
+                                            <dt>会员：</dt>
+                                            <dd>{$data['users']['username']} {$data['users']['nickname']}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>订单状态：</dt>
+                                            <dd>
+                                                {if condition="$data.order_status eq 0"}
+                                                    待付款
+                                                {elseif condition="$data.order_status eq 2"}
+                                                    待发货
+                                                {elseif condition="$data.order_status eq 3"}
+                                                    已发货
+                                                {elseif condition="$data.order_status eq 4"}
+                                                    已收货
+                                                {elseif condition="$data.order_status eq 5"}
+                                                    退货中
+                                                {elseif condition="$data.order_status eq 6"}
+                                                    订单完成
+                                                {/if}
+                                            </dd>
+                                            <dt>应付金额：</dt>
+                                            <dd>{$data.order_price}</dd>
+                                            <dt>支付时间：</dt>
+                                            <dd>
+                                                {neq name="data.pay_status" value="0"}
+                                                {$data.pay_time|date='Y-m-d H:i:s',###}
+                                                {else /}
+                                                未付款
+                                                {/neq}
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="addr-note">
+                                        <h4>收货信息</h4>
+                                        <dl>
+                                            <dt>收货人：</dt>
+                                            <dd>{$dress.user_name}</dd>
+                                            <dt>联系方式：</dt>
+                                            <dd>{$dress.user_phone}</dd>
+                                            <dt>邮编：</dt>
+                                            <dd>{$dress.user_zipcode}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>配送方式：</dt>
+                                            <dd>
+                                                {eq name="data.order_sn" value="3"}
+                                                {$data.shipping_sname}
+                                                {else /}
+                                                未发货
+                                                {/eq}
+                                            </dd>
+                                            <dt>留言：</dt>
+                                            <dd>{$data.users_note}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>收货地址：</dt>
+                                            <dd>{$dress.province} {$dress.city} {$dress.county} {$dress.user_adress}</dd>
+                                        </dl>
+                                    </div>
+
+
+                                    <div class="goods-info">
+                                        <h4>商品信息</h4>
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>商品货号</th>
+                                                <th colspan="2">商品</th>
+                                                <th>规格属性</th>
+                                                <th>数量</th>
+                                                <th>单品价格</th>
+                                                <th>单品小计</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {volist name="order_goods" id='vo'}
+                                            <tr>
+                                                <td class="w60">{$vo.goods_sn}</td>
+                                                <td class="w30"><div class="goods-thumb"><a href="/goods/{$vo.goods_id}.shtml" target="_blank"><img alt="" src="{$vo['goodsimages']['imageurl']}_60x60.jpg"> </a></div></td>
+                                                <td style="text-align: left;"><a href="/goods/{$vo.goods_id}.shtml" target="_blank">{$vo.goods_name}</a><br></td>
+                                                <td class="w80">{$vo.spec_key_name}</td>
+                                                <td class="w60">{$vo.goods_num}</td>
+                                                <td class="w80">{$vo.goods_price}</td>
+                                                <td class="w80">{$vo.goods_price * $vo.goods_num}</td>
+                                            </tr>
+                                            {/volist}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="total-amount contact-info">
+                                        <h3>订单总额：￥{$data.goods_price}</h3>
+                                    </div>
+                                    <div class="contact-info">
+                                        <h3>费用信息 </h3>
+                                        <dl>
+                                            <dt>小计：</dt>
+                                            <dd>{$data.goods_price}</dd>
+                                            <dt>运费：</dt>
+                                            <dd>{$data.pack_fee}</dd>
+                                            <dt>应付：</dt>
+                                            <dd><strong class="red_common">{$data.order_price}</strong></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}}

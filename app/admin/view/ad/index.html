@@ -1,0 +1,97 @@
+{extend name="common/base"}
+{block name="title"}广告管理{/block}
+{block name="main"}
+<style>
+    a.BrandLogo {
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        width: 100px;
+        overflow: hidden;
+        border: 1px solid transparent;
+        float: left;
+        cursor: pointer;
+    }
+    a.BrandLogo:hover {
+        border-color: #ff0036;
+        color: #ff0036;
+        background: #fff;
+    }
+    a.BrandLogo:hover img {
+        display: none;
+    }
+</style>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>广告 > 广告管理</h5>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="clearfix" style="padding-bottom: 10px;">
+                            <a href="/admin/ad/add" class="btn btn-sm btn-primary">
+                                <i class="fa fa-save"></i>
+                                添加
+                            </a>
+                        </div>
+                        <form id="myForm">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="50" style="text-align: center;"><i class="fa fa-star-half-full"></i></th>
+                                    <th>ID</th>
+                                    <th>广告类别</th>
+                                    <th>广告名称</th>
+                                    <th>图片缩略图</th>
+                                    <th>广告链接</th>
+                                    <th>是否显示</th>
+                                    <th>排序</th>
+                                    <th>操作 </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="list"}
+                                <tr>
+                                    <td colspan="9" align="center">对不起，没有查询到任何相关结果！</td>
+                                </tr>
+                                {else /}
+                                {volist name="list" id="vo"}
+                                <tr>
+                                    <td align="center"><i class="fa fa-star"></i></td>
+                                    <td scope="row">{$vo.id}</td>
+                                    <td>{$vo.pid|adp}</td>
+                                    <td>{$vo.ad_name}</td>
+                                    <td align="center">
+                                            <img src="{$vo.ad_code}" width="80" height="40">
+
+                                    </td>
+                                    <td><a href="{$vo.ad_link}" target="_blank">{$SiteaUrl}{$vo.ad_link}</a></td>
+                                    <td>
+                                        <i class="fa {eq name='$vo.enabled' value='1'}fa-check-circle{else /}fa-times-circle{/eq}"></i>
+                                    </td>
+                                    <td>{$vo.orderby}</td>
+                                    <td>
+                                        <a href="/admin/ad/save/id/{$vo.id}" class="btn btn-info btn-xs "><i class="fa fa-pencil"></i> 编辑 </a>
+                                        <a data-url="/admin/ad/del/id/{$vo.id}" class="btn btn-danger btn-xs action-delete"><i class="fa fa-trash-o"></i> 删除 </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                {/empty}
+                                </tbody>
+                            </table>
+                            <div class="paginationcentent">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{/block}

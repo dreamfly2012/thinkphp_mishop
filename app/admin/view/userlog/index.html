@@ -1,0 +1,47 @@
+{extend name="common/base"}
+{block name="main"}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>系统 > 登录日志</h5>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>登录用户</th>
+                                <th>登录IP</th>
+                                <th>登录位置</th>
+                                <th>登录时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.user}</td>
+                                <td>{$vo.ip}</td>
+                                <td>{$vo.location}</td>
+                                <td>{$vo.time|date='Y-m-d H:i:s',###}</td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <div class="paginationcentent">
+                            {$list->render()}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{/block}}

@@ -1,0 +1,46 @@
+<div class="top_nav">
+    <div class="nav_menu">
+        <nav>
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <img src="{$Think.session.user.pic ?? '/static/admin/images/picture.jpg'}" alt="">{$Think.session.user.username}
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                        <li><a href="/admin/user/userinfo"> 修改昵称</a></li>
+                        <li><a href="/admin/user/pwd">修改密码</a></li>
+                        <li><a href="/admin/out.shtml"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
+                    </ul>
+                </li>
+
+               <li role="presentation" class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-green">{notempty name="new"}{$new|count}{/notempty}</span>
+                    </a>
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        {notempty name="new"}
+                            {volist name="new" id="vo"}
+                            <li>
+                                <a>
+                                    <span class="image"><img src="{$vo['users']['headimgurl'] ? : '/static/admin/images/user.png'}" alt="Profile Image" /></span>
+                                    <span>
+                              <span>{$vo['users']['username']}{$vo['users']['nickname']}</span>
+                              <span class="time">{$vo.create_time|date='m-d H:i',###}</span>
+                            </span>
+                                    <span class="message">{$vo.content}</span>
+                                </a>
+                            </li>
+                            {/volist}
+                        {/notempty}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

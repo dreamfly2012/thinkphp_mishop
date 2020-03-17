@@ -15,9 +15,9 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'mi.cn',
+    'database'        => 'mi2.cn',
     // 用户名
-    'username'        => 'xiaomi',
+    'username'        => 'mi2',
     // 密码
     'password'        => '123456',
     // 端口

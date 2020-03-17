@@ -2,12 +2,12 @@
 /**
  * ============================================================================
  * 版权所有 2015-2018
- * 网站地址: https://www.xiaoxiang.ga
+ * 
  * ----------------------------------------------------------------------------
  * 不允许对程序代码以任何形式任何目的的再发布。
  * 本程序采用thinkphp v5.0开发
  * ============================================================================
- * Author: chiqing_85
+ * 
  * Time: 2018/4/20 16:53
  */
 namespace app\index\controller;
@@ -87,7 +87,7 @@ class Index extends Common
      */
     public function act()
     {
-        $act = Db('category')->where('hot',1)->order('id,sort')->field('id,m_name')->select();  //楼层
+        $act = Db('category')->order('id,sort')->field('id,name')->select();  //楼层
         $data = [];
 
         foreach ($act as $v) {

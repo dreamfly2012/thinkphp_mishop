@@ -113,13 +113,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">SKU</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-7 col-xs-12" placeholder="SKU" name="sku">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">品牌</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="selectbox form-group">
@@ -131,44 +124,22 @@
                                     </div>
                                 </div>
                             </div>
-                            {volist name="attr" id="vo"}
+                            <!--规格设置-->
+                            {volist name="specs" id="vo"}
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">{$vo.name}</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">{$vo.spec_name}</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="selectbox form-group">
-                                       {if condition="$vo.gender eq 1"}
-                                        <select class="form-control select" name="attr_{$vo.id}[]">
-                                            <option value=""> -- 请选择 -- </option>
-                                            {volist name="vo.items" id="ge"}
-                                            <option value="{$ge}">{$ge}</option>
-                                            {/volist}
-                                        </select>
-                                        {elseif condition="$vo.gender eq 2" /}
-                                        {volist name="vo.items" id="ge"}
-                                            <input type="checkbox" class="flat" name="attr_{$vo.id}[]" value="{$i}" checked data-parsley-multiple="gender" style="position: absolute; opacity: 0;"><label>&nbsp;普通</label>&nbsp;
+                                       
+                                        {volist name="vo.attrs" id="attr"}
+                                            <input type="checkbox" class="flat" name="attr_{$vo.id}[]" value="{$i}" checked data-parsley-multiple="gender" style="position: absolute; opacity: 0;"><label>&nbsp;{$attr.attr_name}</label>&nbsp;
                                         {/volist}
-                                        {elseif condition="$vo.gender eq 3" /}
-                                        <input type="text" class="form-control col-md-7 col-xs-12" placeholder="{$vo.name}" name="attr_{$vo.id}[]">
-                                        {/if}
+                                       
                                     </div>
                                 </div>
                             </div>
                             {/volist}
-                            {volist name="spec" id="vo"}
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12 th_{$vo.id}">{$vo.name}</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        {volist name="vo.items" id="so" key="k"}
-                                            {eq name="vo.gender" value='2'}
-                                                <div class="goods-itmes">
-                                                    <input type="checkbox" data-spec_id="{$vo.id}" item_id="{$so}" data-parsley-mincheck="{$vo.id}.{$k}" id="Gsattr_{$vo.id}{$k}"  class="flat GoodsSpec" data-parsley-multiple="hobbies" style="position: absolute; opacity: 0;"> {$so}
-                                                </div>
-                                            {/eq}
-                                        {/volist}
-
-                                    </div>
-                                </div>
-                            {/volist}
+                            
 
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>

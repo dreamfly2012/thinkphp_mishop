@@ -2,24 +2,28 @@
 /**
  * ============================================================================
  * 版权所有 2015-2018
- * 
+ *
  * ----------------------------------------------------------------------------
  * 不允许对程序代码以任何形式任何目的的再发布。
  * 本程序采用thinkphp v5.0开发
  * ============================================================================
- * 
+ *
  * Time: 2018/4/17 17:30
  */
 
 namespace app\admin\model;
 
-
 use think\Model;
 
 class Spec extends Model
 {
-    public function category()
-    {
-        return $this->hasOne('category','id', 'cid');
-    }
+
+    protected $table = 'goods_spec';
+
+    protected $pk = 'spec_id';
+
+    // public function category()
+    // {
+    //     return $this->hasOne('category', 'spec_id', 'cid');
+    // }
 }

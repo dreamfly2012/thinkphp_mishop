@@ -35,6 +35,9 @@ class Login extends Model
 
         }elseif(md5($password . $info['token']) !== $info['password'])
         {
+            dump($info['password']);
+            
+            dump(md5('admin3658'));
             return '密码错误，请重新输入……';
 
         }else{

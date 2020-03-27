@@ -2,8 +2,8 @@
 return array (
   'SMTP' => 'smtp.163.com',
   'port' => '25',
-  'email' => 'chiqing_85@163.com',
+  'email' => '470356072@163.com',
   'pwd' => '',
-  'test_eamil' => 'qilingela@qq.com',
-  'unlock' => '1',
+  'test_eamil' => 'fujia0@qq.com',
+  'unlock' => 0,
 );

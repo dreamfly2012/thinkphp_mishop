@@ -2,20 +2,20 @@
 /**
  * ============================================================================
  * 版权所有 2015-2018
- * 
+ *
  * ----------------------------------------------------------------------------
  * 不允许对程序代码以任何形式任何目的的再发布。
  * 本程序采用thinkphp v5.0开发
  * ============================================================================
- * 
+ *
  * Time: 2018/4/18 22:41
  */
 
 namespace app\admin\controller;
 
+use app\admin\model\Goods as Goodser;
 use think\Db;
 use think\Loader;
-use app\admin\model\Goods as Goodser;
 use think\Model;
 
 class Goods extends Common
@@ -27,7 +27,7 @@ class Goods extends Common
      */
     public function index()
     {
-        $list = Goodser::where('gender',1)->order('id desc')->field('content', true)->paginate(12);
+        $list = Goodser::where('gender', 1)->order('id desc')->field('content', true)->paginate(12);
         $this->assign('list', $list);
         return view();
     }
@@ -62,10 +62,8 @@ class Goods extends Common
         input('id') ? $data = input('id') : $data = 0;
         $cate = db('category')->where('pid', $data)->field('id,name')->order('id')->select();
 
-        if(request()->isPost())
-        {
-            if($cate)
-            {
+        if (request()->isPost()) {
+            if ($cate) {
                 return json($cate);
             } else {
                 return 'null';
@@ -82,59 +80,48 @@ class Goods extends Common
      */
     public function add()
     {
-        if(request()->isPost())
-        {
+        if (request()->isPost()) {
             $data = input('post.');
             $scene = empty($data['id']) ? 1 : 2; // 1 表示提交　2　表示更新
             $validate = Loader::validate('Goods');
 
-            if(!$validate->check($data))
-            {
+            if (!$validate->check($data)) {
                 return $validate->getError();
             }
 
-            if($data['gender'] == 1)
-            {
+            if ($data['gender'] == 1) {
                 $data['starttime'] = time();
             } else {
-                $data['starttime'] = strtotime( $data['starttime']);
+                $data['starttime'] = strtotime($data['starttime']);
             }
-            $data['prom'] = implode(',', $data['prom']);    //转字符串
+            $data['prom'] = implode(',', $data['prom']); //转字符串
             $data['city'] = implode(',', $data['city']);
             $goods = new Goodser;
 
-            if($scene == 1){
-                $goods ->data($data,true);
+            if ($scene == 1) {
+                $goods->data($data, true);
                 $goods->allowField(true)->save();
             } else {
                 $goods->allowField(true)->save($data, ['id' => $data['id']]);
             }
-            $goods->afterSave($goods->id);  //商品图片、商品规格
+            $goods->afterSave($goods->id); //商品图片、商品规格
             Model('Goodsattr')->Goodsattrsave($goods->id, $scene); //商品属性参数
-            return jsdata(200,'操作成功……','/admin/goods');
-        }else {
+            return jsdata(200, '操作成功……', '/admin/goods');
+        } else {
             $cmodel = model('category');
             $cid = input('cate');
-            $this->assign('t_cate',$cmodel->get($cid)->name );  //商品所属分类
-            $brand = db('brand')->where('cid ='. $cid. ' or cid = 0')->where('isshow', 1)->select();      //品牌
-            $ChinaCity = file_get_contents('./static/admin/ChinaCity/city_code.json');     //全国城区
-            $spec = db('spec')->where('cid', $cid)->order('sort, id')->select();      //商品规格
-            $attr = db('GoodsAttr')->where('cid', $cid)->order('sort, id')->select(); //商品属性
-            $gattr = $arr = [];
+            $this->assign('t_cate', $cmodel->get($cid)->name); //商品所属分类
 
-            foreach ($attr as $vo)
-            {
-                $gattr[] = array_merge(['id' => $vo['id']],array('name' => $vo['name']), array('items' => explode(',',$vo['items'])), array('gender' => $vo['gender']));
+            $brand = db('brand')->where('cid =' . $cid . ' or cid = 0')->where('isshow', 1)->select(); //品牌
+            $ChinaCity = file_get_contents('./static/admin/ChinaCity/city_code.json'); //全国城区
+            $specs = db('goods_spec')->where('cid', $cid)->order('sort, spec_id')->select(); //商品规格
+
+            foreach ($specs as $k => $v) {
+                $specs[$k]['attrs'] = db('goods_attr')->where('spec_id', $v['spec_id'])->order('sort, attr_id')->select(); //商品属性
             }
 
-            foreach ($spec as $k => $vo)
-            {
-                $arr[] = array_merge(['id' => $vo['id']],array('name' => $vo['name']), array('items' => explode(',',$vo['items'])), array('gender' => $vo['gender']));
-            }
-
-            $this->assign('attr', $gattr);
-            $this->assign('spec', $arr);
-            $this->assign('city',json_decode($ChinaCity,true));
+            $this->assign('specs', $specs);
+            $this->assign('city', json_decode($ChinaCity, true));
             $this->assign('brand', $brand);
             $this->assign('cate', $cid);
             return view();
@@ -149,34 +136,32 @@ class Goods extends Common
     {
         $id = input('id');
         $m = model('goods');
-        $goods= $m::get($id);
-        $brand = db('brand')->where('cid = '. $goods->uid .' or cid = 0')->where('isshow', 1)->select();      //品牌
+        $goods = $m::get($id);
+        $brand = db('brand')->where('cid = ' . $goods->uid . ' or cid = 0')->where('isshow', 1)->select(); //品牌
         $attr = db('GoodsAttr')->where('cid', $goods->uid)->order('sort, id')->select(); //商品属性
-//        $attr = Db::query("select * from goodsattr as a,goods_attr as b where a.attr_id = b.id  and goods_id like ".$goods->id);    //属性
-        $spec = db('spec')->where('cid', $goods->uid)->order('sort, id')->select();      //商品规格
-        $ChinaCity = file_get_contents('./static/admin/ChinaCity/city_code.json');     //全国城区
-        $goods_images = Db::name('goodsimages')->where('goodsid', $goods->id)->select();    //宝贝预览图片
+        //        $attr = Db::query("select * from goodsattr as a,goods_attr as b where a.attr_id = b.id  and goods_id like ".$goods->id);    //属性
+        $spec = db('spec')->where('cid', $goods->uid)->order('sort, id')->select(); //商品规格
+        $ChinaCity = file_get_contents('./static/admin/ChinaCity/city_code.json'); //全国城区
+        $goods_images = Db::name('goodsimages')->where('goodsid', $goods->id)->select(); //宝贝预览图片
         $goods_spec_key = Db::name('goodsseec')->where('goods_id', $goods->id)->column("group_concat(`key` order by store_count desc separator ',')");
         $goods_spec_key = explode(',', $goods_spec_key[0]);
         $attrs = $specs = [];
 
-        foreach ($attr as $v)
-        {
+        foreach ($attr as $v) {
             $v['items'] = explode(',', $v['items']);
             $v['value'] = db('goodsattr')->where('attr_id', $v['id'])->value('attr_value');
             $attrs[] = $v;
         }
 
-        foreach ($spec as $v)
-        {
+        foreach ($spec as $v) {
             $v['items'] = explode(',', $v['items']);
             $specs[] = $v;
         }
 
         $goods->prom = explode(',', $goods->prom);
-        $this->assign('spec_keys',$goods_spec_key);
+        $this->assign('spec_keys', $goods_spec_key);
         $this->assign('goods_images', $goods_images);
-        $this->assign('city',json_decode($ChinaCity, true));
+        $this->assign('city', json_decode($ChinaCity, true));
         $this->assign('spec', $specs);
         $this->assign('attr', $attrs);
         $this->assign('brand', $brand);
@@ -193,32 +178,28 @@ class Goods extends Common
         $spec = Db('goodsseec')->where('goods_id', $id)->select();
         $str = '<table class="table table-bordered table-hover" id="spec_input_tab"><thead><tr>';
 
-        foreach ($spec as $v)
-        {
-            $key_name = explode(' ',$v['key_name']);
+        foreach ($spec as $v) {
+            $key_name = explode(' ', $v['key_name']);
         }
 
-        foreach ($key_name as $vo)
-        {
+        foreach ($key_name as $vo) {
             $key = explode(':', $vo);
-            $str .= '<th>'. $key[0] .'</th>';
+            $str .= '<th>' . $key[0] . '</th>';
         }
         $str .= '<th>价格</th><th>库存</th><th>SKU</th></tr></thead>';
 
-        foreach ($spec as $v)
-        {
+        foreach ($spec as $v) {
             $str .= '<tr>';
-            $key_name = explode(' ',$v['key_name']);
+            $key_name = explode(' ', $v['key_name']);
 
-           foreach ($key_name as $vo)
-           {
-               $vo = explode(':', $vo);
-               $str .= '<td>'.$vo[1].'</td>';
-           }
+            foreach ($key_name as $vo) {
+                $vo = explode(':', $vo);
+                $str .= '<td>' . $vo[1] . '</td>';
+            }
 
-            $str .= '<td><input type="text" class="form-control col-md-7 col-xs-12" placeholder="价格" name="item['.$v["key"].'][price]" value="'. $v["price"].'"></td>';
-            $str .= '<td><input type="text" class="form-control col-md-7 col-xs-12 item-store" placeholder="库存" name="item['.$v["key"].'][store_count]" value="'. $v["store_count"].'"></td>';
-            $str .= '<td><input type="text" class="form-control col-md-7 col-xs-12" placeholder="SKU" name="item['.$v["key"].'][sku]" value="'. $v["sku"].'"><input type="hidden" name="item['.$v["key"].'][key_name]" value="'. $v["key_name"].'"></td>';
+            $str .= '<td><input type="text" class="form-control col-md-7 col-xs-12" placeholder="价格" name="item[' . $v["key"] . '][price]" value="' . $v["price"] . '"></td>';
+            $str .= '<td><input type="text" class="form-control col-md-7 col-xs-12 item-store" placeholder="库存" name="item[' . $v["key"] . '][store_count]" value="' . $v["store_count"] . '"></td>';
+            $str .= '<td><input type="text" class="form-control col-md-7 col-xs-12" placeholder="SKU" name="item[' . $v["key"] . '][sku]" value="' . $v["sku"] . '"><input type="hidden" name="item[' . $v["key"] . '][key_name]" value="' . $v["key_name"] . '"></td>';
             $str .= '</tr>';
         }
         $str .= "</table>";
@@ -235,9 +216,9 @@ class Goods extends Common
         $id = input('id');
         $m = model('goods');
         $m::destroy($id);
-        Db::name('goodsattr')->where('goods_id',$id)->delete();
+        Db::name('goodsattr')->where('goods_id', $id)->delete();
         Db::name('goodsimages')->where('goodsid', $id)->delete();
         Db::name('goodsseec')->where('goods_id', $id)->delete();
-        return jsdata(200,'删除成功……','/admin/goods');
+        return jsdata(200, '删除成功……', '/admin/goods');
     }
 }

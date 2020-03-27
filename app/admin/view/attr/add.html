@@ -22,15 +22,15 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">属性名称</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-7 col-xs-12" placeholder="属性名称" name="name">
+                                    <input type="text" class="form-control col-md-7 col-xs-12" placeholder="属性名称" name="attr_name">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">所属分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="selectbox form-group">
-                                        <select class="form-control select" name="cid">
-                                            {volist name="cate" id="vo"}
+                                        <select class="form-control select select_category" name="cid">
+                                            {volist name="categories" id="vo"}
                                             <option value="{$vo.id}">{$vo.name}</option>
                                             {/volist}
                                         </select>
@@ -39,24 +39,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">属性类</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">所属规格</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                    <input type="radio" class="flat" name="gender" value="1" checked data-parsley-multiple="gender" style="position: absolute; opacity: 0;"><label>&nbsp;单选</label>
-
-                                    <input type="radio" class="flat" name="gender" value="2" data-parsley-multiple="gender" style="position: absolute; opacity: 0;"><label>&nbsp;复选</label>
-
-                                    <input type="radio" class="flat" name="gender" value="3" data-parsley-multiple="gender" style="position: absolute; opacity: 0;"><label>&nbsp;输入</label>
+                                    <div class="selectbox form-group">
+                                        <select class="form-control select select_specs" name="spec_id">
+                                            {volist name="specs" id="vo"}
+                                            <option value="{$vo.spec_id}">{$vo.spec_name}</option>
+                                            {/volist}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">属性项</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <textarea id="message" class="form-control" name="items" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10" placeholder="属性项:"></textarea>
-                                    <span class="notic">PS：多属性项以逗号( ,) 隔开</span>
-                                </div>
-                            </div>
+                          
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">默认排序</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -77,4 +72,5 @@
         </div>
     </div>
 </div>
+
 {/block}

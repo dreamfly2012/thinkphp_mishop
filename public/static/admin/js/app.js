@@ -352,34 +352,34 @@ $(document).on('click', '.cate_id', function () {
         });
     };*/
 });
-//选择商品规格
-$(document).on('ifClicked', 'input.GoodsSpec', function () {
 
-    if($(this).hasClass('success'))
-    {
-        $(this).removeClass('success');
-    } else {
-        $(this).addClass('success');
-    }
+//选择分类的时候，触发规格选择
+$(document).on('change', '.select_category', function () {
+    id = $(this).val();
 
-    var arr = {};
-
-    var spec = $('input.success');
-
-    spec.each(function () {
-        if($(this).hasClass('success'))
-        {
-            var spec_id = $(this).data('spec_id');
-
-            var mincheck = $(this).data('parsley-mincheck');
-
-            if(!arr.hasOwnProperty(spec_id)) arr[spec_id] = [];
-
-            arr[spec_id].push(mincheck);
+     $.ajax({
+        url: "/admin/spec/get", 
+        data:{
+            cid: id
+        },
+        type:"POST",
+        dataType:"JSON",
+        success: function(result){
+            var html = "";
+            if(result.data.length==0){
+                html = '<option value="0">不存在规格</option>'
+            }else{
+                for(var i=0;i<result.data.length;i++){
+                    html += '<option value="'+ result.data[i].spec_id +'">' + result.data[i].spec_name + '</option>';
+                }
+            }
+            
+            $(".select_specs").html(html);
         }
     });
+   
 
-    descartes(arr,hbdyg);
+    //descartes(arr,hbdyg);
 });
 
 //生成商品规格表

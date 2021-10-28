@@ -114,7 +114,7 @@ class Goods extends Common
 
             $brand = db('brand')->where('cid =' . $cid . ' or cid = 0')->where('isshow', 1)->select(); //品牌
             $ChinaCity = file_get_contents('./static/admin/ChinaCity/city_code.json'); //全国城区
-            $specs = db('goods_spec')->where('cid', $cid)->order('sort, spec_id')->select(); //商品规格
+            $specs = db('goods_spec')->where('id', $cid)->order('id, goods_id')->select(); //商品规格
 
             foreach ($specs as $k => $v) {
                 $specs[$k]['attrs'] = db('goods_attr')->where('spec_id', $v['spec_id'])->order('sort, attr_id')->select(); //商品属性

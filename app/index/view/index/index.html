@@ -92,6 +92,14 @@
 				</div>
 			</div>
 		</div>
+		{volist name="floor_ad" id="v"} 
+		<div class="slide" style=" width: 1226px; display: block; ">
+								<a href="{$v.ad_link}" target="_blank">
+									<img src="{$v.ad_code}">
+								</a>
+							</div>
+		{/volist}
+
 
 		<div class="home-star-goods" id="J_homeStar">
 			<div class="xm-plain-box">
@@ -110,7 +118,7 @@
 							{volist name="recommend" id="vo"}
 							<li class="rainbow-item-{$i}" style="float: left; width: 234px;">
 								<a class="thumb" href="/goods/{$vo.id}.shtml" target="_blank">
-									<img src="{$vo['goodsimages']['imageurl']}_430x430.jpg" alt="MI/小米 4C">
+									<img src="{$vo['goodsimages']['imageurl']}_430x430.jpg" alt="{$vo.name}">
 								</a>
 								<h3 class="title">
 									<a href="/goods/{$vo.id}.shtml" target="_blank">{$vo.name}</a>
@@ -123,7 +131,7 @@
 					</div>
 
 					<div class="J_itemBox J_homeBanner home-banner-box home-banner-box-hero is-visible" data-index="1" style="margin-top: 40px;">
-						<a href="https://hd.mi.com/w/18/04101m/index.html?client_id=180100041086&amp;masid=17409.0338" target="_blank" data-log_code="31pchomebanner_1001011#t=normal&amp;page=home&amp;act=other&amp;bid=3186790.1&amp;adm=5132" data-stat-id="8cd11f28ae7db45b" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-8cd11f28ae7db45b', 'https://hd.mi.com/w/18/04101m/index.htmlclient_id=180100041086&amp;masid=17409.0338', 'pcpid', '31pchomebanner_1001011#t=normal&amp;page=home&amp;act=other&amp;bid=3186790.1&amp;adm=5132']);">
+						<a href="/" target="_blank" data-log_code="31pchomebanner_1001011#t=normal&amp;page=home&amp;act=other&amp;bid=3186790.1&amp;adm=5132" data-stat-id="8cd11f28ae7db45b" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-8cd11f28ae7db45b', 'https://hd.mi.com/w/18/04101m/index.htmlclient_id=180100041086&amp;masid=17409.0338', 'pcpid', '31pchomebanner_1001011#t=normal&amp;page=home&amp;act=other&amp;bid=3186790.1&amp;adm=5132']);">
 							<img class="" alt="6X发布会预热蓝" width="1226" src="//i1.mifile.cn/a4/xmad_15241887117657_MWdbk.jpg">
 						</a>
 					</div>
@@ -138,9 +146,9 @@
 				{volist name="cat" id="vo"}
 				<div id="smart" class="home-brick-box home-brick-row-2-box xm-plain-box J_itemBox J_brickBox" data-from-stat="false">
 					<div class="box-hd">
-						<h2 class="title">{$vo.m_name}</h2>
+						<h2 class="title">{$vo.name}</h2>
 						<div class="more J_brickNav">
-							<a class="more-link" href="https://www.mi.com/p/1915.html" target="_blank" data-stat-id="b90a628e1af0310c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-b90a628e1af0310c', 'https://www.mi.com/p/1915.html', 'pcpid', '']);">查看全部<i class="iconfont"></i></a>
+							<a class="more-link" href="/" target="_blank" data-stat-id="b90a628e1af0310c" onclick="_msq.push(['trackEvent', '79fe2eae924d2a2e-b90a628e1af0310c', 'https://www.mi.com/p/1915.html', 'pcpid', '']);">查看全部<i class="iconfont"></i></a>
 						</div>
 					</div>
 					<div class="box-bd J_brickBd">

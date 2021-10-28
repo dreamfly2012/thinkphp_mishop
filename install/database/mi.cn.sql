@@ -22,11 +22,16 @@ CREATE TABLE IF NOT EXISTS `ad` (
   `orderby` smallint(6) DEFAULT '100' COMMENT '排序',
   `bgcolor` varchar(20) NOT NULL COMMENT '背景颜色',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xiaomishop.ad 的数据：0 rows
+-- 正在导出表  xiaomishop.ad 的数据：4 rows
 DELETE FROM `ad`;
 /*!40000 ALTER TABLE `ad` DISABLE KEYS */;
+INSERT INTO `ad` (`id`, `pid`, `ad_name`, `ad_link`, `ad_code`, `enabled`, `orderby`, `bgcolor`) VALUES
+	(1, 11, 'redminote', '', '/uploads/20211028\\33e5dd91b3e5c4f9ee07d8707d7fbf69.jpg', 1, 100, ''),
+	(2, 11, '小米笔记本win11', '', '/uploads/20211028\\dbd4604c8af86411840b6a9abdec5ac6.webp', 1, 100, ''),
+	(3, 11, '小米平板5', '', '/uploads/20211028\\2845c7859591174d9e83e3cd3196b3a4.webp', 1, 100, ''),
+	(4, 1, 'k40', '', '/uploads/20211028\\6497b2ba630ac54a7889611625bb61e2.webp', 1, 100, '');
 /*!40000 ALTER TABLE `ad` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.address 结构
@@ -104,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xiaomishop.category 的数据：1 rows
+-- 正在导出表  xiaomishop.category 的数据：10 rows
 DELETE FROM `category`;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` (`id`, `name`, `catepic`, `isshow`, `ishot`, `pid`, `sort`, `time`, `color`) VALUES
@@ -172,11 +177,13 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `eye` int(15) DEFAULT '0' COMMENT '商品浏览次数',
   `sort` smallint(16) DEFAULT '100' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- 正在导出表  xiaomishop.goods 的数据：0 rows
 DELETE FROM `goods`;
 /*!40000 ALTER TABLE `goods` DISABLE KEYS */;
+INSERT INTO `goods` (`id`, `uid`, `cid`, `name`, `serial`, `sku`, `market_price`, `price`, `count`, `remark`, `content`, `keyword`, `make`, `city`, `shipping`, `invoice`, `repts`, `recommend`, `prom`, `gender`, `starttime`, `sales_sum`, `note_num`, `eye`, `sort`) VALUES
+	(1, 1, 0, '黑鲨4s', 'heisha4s', NULL, 2699.00, 2689.00, 999, '', '&lt;p&gt;&lt;img src=&quot;https://cdn.cnbj1.fds.api.mi-img.com/product-images/blackshark4s5e589d/img_1_3.png&quot;/&gt;&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635411751, 0, 0, 0, 100);
 /*!40000 ALTER TABLE `goods` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.goodsattr 结构
@@ -206,23 +213,6 @@ CREATE TABLE IF NOT EXISTS `goodsimages` (
 DELETE FROM `goodsimages`;
 /*!40000 ALTER TABLE `goodsimages` DISABLE KEYS */;
 /*!40000 ALTER TABLE `goodsimages` ENABLE KEYS */;
-
--- 导出  表 xiaomishop.goodsseec 结构
-CREATE TABLE IF NOT EXISTS `goodsseec` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
-  `goods_id` mediumint(8) DEFAULT '0' COMMENT '商品id',
-  `key` varchar(255) NOT NULL COMMENT '规格键名',
-  `key_name` varchar(255) DEFAULT NULL COMMENT '规格中文键名',
-  `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
-  `store_count` int(10) unsigned DEFAULT '10' COMMENT '库存数量',
-  `sku` varchar(128) DEFAULT NULL COMMENT 'sku',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- 正在导出表  xiaomishop.goodsseec 的数据：0 rows
-DELETE FROM `goodsseec`;
-/*!40000 ALTER TABLE `goodsseec` DISABLE KEYS */;
-/*!40000 ALTER TABLE `goodsseec` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.goods_attr 结构
 CREATE TABLE IF NOT EXISTS `goods_attr` (
@@ -261,6 +251,23 @@ CREATE TABLE IF NOT EXISTS `goods_comment` (
 DELETE FROM `goods_comment`;
 /*!40000 ALTER TABLE `goods_comment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `goods_comment` ENABLE KEYS */;
+
+-- 导出  表 xiaomishop.goods_spec 结构
+CREATE TABLE IF NOT EXISTS `goods_spec` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
+  `goods_id` mediumint(8) DEFAULT '0' COMMENT '商品id',
+  `key` varchar(255) NOT NULL COMMENT '规格键名',
+  `key_name` varchar(255) DEFAULT NULL COMMENT '规格中文键名',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
+  `store_count` int(10) unsigned DEFAULT '10' COMMENT '库存数量',
+  `sku` varchar(128) DEFAULT NULL COMMENT 'sku',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品规格';
+
+-- 正在导出表  xiaomishop.goods_spec 的数据：0 rows
+DELETE FROM `goods_spec`;
+/*!40000 ALTER TABLE `goods_spec` DISABLE KEYS */;
+/*!40000 ALTER TABLE `goods_spec` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.link 结构
 CREATE TABLE IF NOT EXISTS `link` (

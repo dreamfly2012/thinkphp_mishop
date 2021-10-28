@@ -1,6 +1,0 @@
-GET https://httpbin.org/get
-content-type: application/json
-
-{
-    a:a
-}

@@ -32,15 +32,10 @@ class Login extends Model
         if(empty($info))
         {
             return '帐户不存在！';
-
-        }elseif(md5($password . $info['token']) !== $info['password'])
-        {
-            dump($info['password']);
-            
-            dump(md5('admin3658'));
+        } elseif (md5($password . $info['token']) !== $info['password']) {
+            dump(md5('admin1234'));
             return '密码错误，请重新输入……';
-
-        }else{
+        } else {
 
             if($info['status'] == false) return '该用户已冻结，禁止登录';
 

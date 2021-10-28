@@ -22,7 +22,7 @@ class Login extends Controller
 {
     public function _initialize()
     {
-        $MetaCopyright = '<a href="/" class="bluer"> '.  Db::name('config')->where('keyname', 'SiteaName')->value('v') . '</a> Copyright&copy; 2015 - '. date('Y',time()) . ' 版权所有';
+        $MetaCopyright =  '</a> Copyright&copy; 2015 - '. date('Y',time()) . ' 版权所有';
         $this->assign('MetaCopyright', $MetaCopyright);
     }
     /**

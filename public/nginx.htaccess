@@ -1,5 +1,5 @@
-location / {
-	if (!-e $request_filename){
-		rewrite  ^(.*)$  /index.php?s=$1  last;   break;
-	}
-}
+ if (!-e $request_filename)
+ {
+            #地址作为将参数rewrite到index.php上。
+            rewrite ^/(.*)$ /index.php/$1;
+ }

@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- 主机:                           127.0.0.1
--- 服务器版本:                        5.7.26 - MySQL Community Server (GPL)
+-- 服务器版本:                        5.7.28 - MySQL Community Server (GPL)
 -- 服务器操作系统:                      Win64
--- HeidiSQL 版本:                  11.0.0.5919
+-- HeidiSQL 版本:                  11.3.0.6295
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,6 +10,7 @@
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- 导出  表 xiaomishop.ad 结构
 CREATE TABLE IF NOT EXISTS `ad` (
@@ -22,16 +23,17 @@ CREATE TABLE IF NOT EXISTS `ad` (
   `orderby` smallint(6) DEFAULT '100' COMMENT '排序',
   `bgcolor` varchar(20) NOT NULL COMMENT '背景颜色',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xiaomishop.ad 的数据：4 rows
+-- 正在导出表  xiaomishop.ad 的数据：5 rows
 DELETE FROM `ad`;
 /*!40000 ALTER TABLE `ad` DISABLE KEYS */;
 INSERT INTO `ad` (`id`, `pid`, `ad_name`, `ad_link`, `ad_code`, `enabled`, `orderby`, `bgcolor`) VALUES
 	(1, 11, 'redminote', '', '/uploads/20211028\\33e5dd91b3e5c4f9ee07d8707d7fbf69.jpg', 1, 100, ''),
 	(2, 11, '小米笔记本win11', '', '/uploads/20211028\\dbd4604c8af86411840b6a9abdec5ac6.webp', 1, 100, ''),
 	(3, 11, '小米平板5', '', '/uploads/20211028\\2845c7859591174d9e83e3cd3196b3a4.webp', 1, 100, ''),
-	(4, 1, 'k40', '', '/uploads/20211028\\6497b2ba630ac54a7889611625bb61e2.webp', 1, 100, '');
+	(4, 1, 'k40', '', '/uploads/20211029\\90a99b03e85a24c54f6883908f3c5bf1.webp', 1, 100, ''),
+	(6, 12, 'k40', '', '/uploads/20211029\\914b30be94b45c842db49e19278f218f.webp', 1, 100, '');
 /*!40000 ALTER TABLE `ad` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.address 结构
@@ -64,11 +66,14 @@ CREATE TABLE IF NOT EXISTS `brand` (
   `sort` smallint(16) NOT NULL COMMENT '排序',
   `isshow` tinyint(1) NOT NULL COMMENT '0 不显示,1 显示',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- 正在导出表  xiaomishop.brand 的数据：0 rows
 DELETE FROM `brand`;
 /*!40000 ALTER TABLE `brand` DISABLE KEYS */;
+INSERT INTO `brand` (`id`, `cid`, `name`, `logo`, `url`, `sort`, `isshow`) VALUES
+	(1, 0, '小米', '', '', 100, 1),
+	(2, 0, '红米', '', '', 100, 1);
 /*!40000 ALTER TABLE `brand` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.cart 结构
@@ -177,29 +182,21 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `eye` int(15) DEFAULT '0' COMMENT '商品浏览次数',
   `sort` smallint(16) DEFAULT '100' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xiaomishop.goods 的数据：0 rows
+-- 正在导出表  xiaomishop.goods 的数据：8 rows
 DELETE FROM `goods`;
 /*!40000 ALTER TABLE `goods` DISABLE KEYS */;
 INSERT INTO `goods` (`id`, `uid`, `cid`, `name`, `serial`, `sku`, `market_price`, `price`, `count`, `remark`, `content`, `keyword`, `make`, `city`, `shipping`, `invoice`, `repts`, `recommend`, `prom`, `gender`, `starttime`, `sales_sum`, `note_num`, `eye`, `sort`) VALUES
-	(1, 1, 0, '黑鲨4s', 'heisha4s', NULL, 2699.00, 2689.00, 999, '', '&lt;p&gt;&lt;img src=&quot;https://cdn.cnbj1.fds.api.mi-img.com/product-images/blackshark4s5e589d/img_1_3.png&quot;/&gt;&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635411751, 0, 0, 0, 100);
+	(1, 1, 0, '黑鲨4s', 'heisha4s', '', 2699.00, 2689.00, 999, '', '&lt;p&gt;商品详情&lt;img src=&quot;https://cdn.cnbj1.fds.api.mi-img.com/product-images/blackshark4s5e589d/img_1_3.png&quot;/&gt;&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635478433, 0, 0, 0, 100),
+	(2, 1, 0, 'rednote 11', 'RD11', NULL, 1799.00, 1635.00, 999, '', '&lt;p&gt;red11 红米&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635480533, 0, 0, 0, 100),
+	(3, 1, 0, 'xiaomi mix 4', 'XM 4', NULL, 4999.00, 4599.00, 999, '', '&lt;p&gt;小米mix 4 大屏大享受&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635480616, 0, 0, 0, 100),
+	(4, 1, 0, 'red note 10', 'RD10', NULL, 1599.00, 1299.00, 6565, '', '&lt;p&gt;rednote10 性价比&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635480699, 0, 0, 0, 100),
+	(5, 1, 0, 'xiaomi civi', 'XM C', NULL, 2599.00, 2499.00, 5656, '', '&lt;p&gt;xiaomixiaom civis&amp;nbsp;&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635480776, 0, 0, 0, 100),
+	(6, 1, 0, 'redmi k30', 'RDK30', NULL, 1899.00, 1899.00, 4654, '', '&lt;p&gt;红米k30&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635480868, 0, 0, 1, 100),
+	(7, 1, 0, 'xiaomi10', 'XM10', NULL, 5999.00, 5999.00, 999, '', '&lt;p&gt;小米10，10年精品&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635480926, 0, 0, 0, 100),
+	(8, 1, 0, 'Xiaomi 11 青春版', 'XM11Y', NULL, 2999.00, 2599.00, 999, '', '&lt;p&gt;xiaomi青春版11&lt;/p&gt;', '', 0, '', 0, 1, 0, 0, 1, 1, 1635481025, 0, 0, 0, 100);
 /*!40000 ALTER TABLE `goods` ENABLE KEYS */;
-
--- 导出  表 xiaomishop.goodsattr 结构
-CREATE TABLE IF NOT EXISTS `goodsattr` (
-  `goods_attr_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '商品属性ID',
-  `goods_id` mediumint(8) DEFAULT '0' COMMENT '商品id',
-  `attr_id` smallint(5) DEFAULT '0' COMMENT '属性ID',
-  `attr_value` text COMMENT '属性值',
-  `attr_price` varchar(255) DEFAULT NULL COMMENT '属性价格',
-  PRIMARY KEY (`goods_attr_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- 正在导出表  xiaomishop.goodsattr 的数据：0 rows
-DELETE FROM `goodsattr`;
-/*!40000 ALTER TABLE `goodsattr` DISABLE KEYS */;
-/*!40000 ALTER TABLE `goodsattr` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.goodsimages 结构
 CREATE TABLE IF NOT EXISTS `goodsimages` (
@@ -207,23 +204,33 @@ CREATE TABLE IF NOT EXISTS `goodsimages` (
   `goodsid` mediumint(8) DEFAULT '0' COMMENT '商品id',
   `imageurl` varchar(255) DEFAULT NULL COMMENT '图片url地址',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xiaomishop.goodsimages 的数据：0 rows
+-- 正在导出表  xiaomishop.goodsimages 的数据：10 rows
 DELETE FROM `goodsimages`;
 /*!40000 ALTER TABLE `goodsimages` DISABLE KEYS */;
+INSERT INTO `goodsimages` (`id`, `goodsid`, `imageurl`) VALUES
+	(1, 1, '/uploads/goods/20211029/7b59e8e6fb4c36f076dfdf843456223e.webp'),
+	(2, 1, '/uploads/goods/20211029/169ed34cdeb36ffd9fdb9d9effaea18b.jpg'),
+	(3, 1, '&lt;pre&gt;string(45) '),
+	(4, 2, '/uploads/goods/20211029/7d02653138438a7229470ca070782940.jpg'),
+	(5, 3, '/uploads/goods/20211029/5c5fda0242b7709b58521d4239854b49.jpg'),
+	(6, 4, '/uploads/goods/20211029/7288c251d0e700160f0f07c80f8df5a4.jpg'),
+	(7, 5, '/uploads/goods/20211029/f9314c5f7f2f016fd90e03bd8428d92c.jpg'),
+	(8, 6, '/uploads/goods/20211029/c9608aabe9b4b26ced01790d872f4654.jpg'),
+	(9, 7, '/uploads/goods/20211029/f35fdf89fc5236b7d723460dce50239f.jpg'),
+	(10, 8, '/uploads/goods/20211029/4098172e4fb9a1be8b9a9d6c268fb8c9.jpg');
 /*!40000 ALTER TABLE `goodsimages` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.goods_attr 结构
 CREATE TABLE IF NOT EXISTS `goods_attr` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL COMMENT '属性名称',
-  `cid` int(10) NOT NULL COMMENT '分类属性ID',
-  `gender` smallint(1) DEFAULT NULL COMMENT '属性类',
-  `items` text NOT NULL COMMENT '可选值列表',
-  `sort` smallint(16) NOT NULL COMMENT '排序',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `goods_attr_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '商品属性ID',
+  `goods_id` mediumint(8) DEFAULT '0' COMMENT '商品id',
+  `attr_id` smallint(5) DEFAULT '0' COMMENT '属性ID',
+  `attr_value` text COMMENT '属性值',
+  `attr_price` varchar(255) DEFAULT NULL COMMENT '属性价格',
+  PRIMARY KEY (`goods_attr_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- 正在导出表  xiaomishop.goods_attr 的数据：0 rows
 DELETE FROM `goods_attr`;
@@ -371,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `openid`, `username`, `password`, `mobile`, `email`, `pic`, `nickname`, `status`, `reg_time`, `login_time`, `login_ip`, `token`) VALUES
-	(1, '', 'admin', 'c93ccd78b2076528346216b3b2f701e6', '', '', '', '', 1, 0, 1635403720, '127.0.0.1', 1234);
+	(1, '', 'admin', 'c93ccd78b2076528346216b3b2f701e6', '', '', '', '', 1, 0, 1635473406, '127.0.0.1', 1234);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- 导出  表 xiaomishop.users 结构
@@ -405,15 +412,17 @@ CREATE TABLE IF NOT EXISTS `user_log` (
   `ip` varchar(16) NOT NULL COMMENT '登录IP',
   `location` text NOT NULL COMMENT '位置',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xiaomishop.user_log 的数据：1 rows
+-- 正在导出表  xiaomishop.user_log 的数据：2 rows
 DELETE FROM `user_log`;
 /*!40000 ALTER TABLE `user_log` DISABLE KEYS */;
 INSERT INTO `user_log` (`id`, `user`, `time`, `ip`, `location`) VALUES
-	(1, 'admin', 1635403720, '127.0.0.1', '本地');
+	(1, 'admin', 1635403720, '127.0.0.1', '本地'),
+	(2, 'admin', 1635473406, '127.0.0.1', '本地');
 /*!40000 ALTER TABLE `user_log` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

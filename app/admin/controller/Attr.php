@@ -24,7 +24,7 @@ class Attr extends Common
      */
     public function index()
     {
-        $this->assign('list', model('attr')->order('sort, attr_id')->paginate(12));
+        $this->assign('list', model('attr')->order('attr_id')->paginate(12));
         return view();
     }
     /**

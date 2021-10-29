@@ -20,9 +20,10 @@ use think\Model;
 class Goodsseec extends Model
 {
     /**
-     * Title:
+     * Title:商品属性表
      * Notes:get_spec
      */
+    protected $table = "goods_spec";
     public function get_spec($id)
     {
         $key = $this->where('goods_id', $id)->column("group_concat(`key` ORDER BY store_count desc SEPARATOR ',')");
@@ -40,7 +41,7 @@ class Goodsseec extends Model
         foreach ($arr as $vo2)
         {
            $spec = explode('.', $vo2);
-           $spec2 = Db::name('spec')->where('id',$spec[0])->select();
+           $spec2 = Db::name('goods_spec')->where('id',$spec[0])->select();
 
             if($spec2)
             {

@@ -38,7 +38,7 @@ class Goods extends Common
         }
 
         $goods_images_list = db('goodsimages')->where('goodsid', input('id'))->field('imageurl')->select();       //商品图
-        $goodsseec = db('goodsseec')->where('goods_id', input('id'))->column('key,id,price,key_name,store_count'); //规格　价格　库存
+        $goodsseec = db('goods_spec')->where('goods_id', input('id'))->column('key,id,price,key_name,store_count'); //规格　价格　库存
         $Goodsseec = new Goodsseec;
         $keys = $Goodsseec->get_spec(input('id'));
         $goodsattr = new Goodsattr();

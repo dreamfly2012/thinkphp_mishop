@@ -47,14 +47,23 @@ class Cart extends Common
             $listItem .= $v['id'].',';
             $alltotal += $v['goods_price'] * $v['goods_num'];   //总价
         }
+        $cid = $this->getRelateCategory();
+        $relative_goods = model('goods')->where('cid',$cid)->limit(10)->select();
 
         $listItem = trim($listItem,',');
 		$this->assign('alltotal', $alltotal);
         $this->assign('listItem', $listItem);
+        $this->assign('relative_goods', $relative_goods);
 		$this->assign('usercartnum', $usercartnum);
 		$this->assign('cartlist', $cartlist);
 		return view();
 	}
+
+    //todo:获取用户喜欢的商品分类
+    public function getRelateCategory()
+    {
+        return 0;
+    }
 
     /** 添加购物车
      * Title:

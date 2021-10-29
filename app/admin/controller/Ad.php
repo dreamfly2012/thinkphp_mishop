@@ -99,5 +99,11 @@ class Ad extends Common
             return view();
         }
     }
-
+    
+    public function del()
+    {
+        $id = input('id');
+        model("ad")->where(['id'=>$id])->delete();
+        return "删除成功";
+    }
 }

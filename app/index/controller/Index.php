@@ -66,8 +66,10 @@ class Index extends Common
     public function ad()
     {
     	$ad = Db('ad')->where('pid', 11) -> select();
-    	$floor_ad = Db('ad')->where('pid', 1)-> select();
+    	$floor_ad = Db('ad')->where('pid', 12)-> select();
+        $first_side_ad = Db('ad')->where('pid', 1)->select();
         $this->assign('floor_ad', $floor_ad);
+        $this->assign('first_side_ad', $first_side_ad);
     	return $this->assign('ad', $ad);
     }
 

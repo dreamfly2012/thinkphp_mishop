@@ -102,21 +102,22 @@ class Upload extends Controller
      */
     public function goods()
     {
-        $files = request()->file('images');
+        $file = request()->file('images');
 
-        if($files)
+        if($file)
         {
-           $info = $files->validate(['size'=>512000, 'ext'=>'jpeg,jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads/goods');
+           $info = $file->validate(['size'=>5120000, 'ext'=>'jpeg,jpg,png,gif,webp'])->move(ROOT_PATH . 'public' . DS . 'uploads/goods');
+          
            if($info)
            {
                $savename = $info->getSaveName();
                $savename = str_replace('\\', '/', $savename);
-               $image = Image::open($files);
+               $image = Image::open($info);
                $this->checkPath( realpath($_SERVER['DOCUMENT_ROOT']) . DS.'uploads/goods/items/'. date('Ymd'));
 
-               $thumem = '/uploads/goods/'. DS .$savename .'_430x430.jpg';
+               $thumem = '/uploads/goods/' .$savename .'_430x430.jpg';
                $image->thumb(430, 430)->save( realpath($_SERVER['DOCUMENT_ROOT']) . $thumem);       //430*430缩略图
-               $thumes = '/uploads/goods/'. DS .$savename .'_60x60.jpg';
+               $thumes = '/uploads/goods/' .$savename .'_60x60.jpg';
                $image->thumb(60, 60)->save( realpath($_SERVER['DOCUMENT_ROOT']) . $thumes);        //60*60缩略图
                return '/uploads/goods/'.$savename;
            }

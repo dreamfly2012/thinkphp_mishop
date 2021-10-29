@@ -17,9 +17,9 @@ return [
     // 数据库名
     'database'        => 'xiaomishop',
     // 用户名
-    'username'        => 'xiaomishop',
+    'username'        => 'root',
     // 密码
-    'password'        => '123456',
+    'password'        => 'root',
     // 端口
     'hostport'        => '',
     // 连接dsn

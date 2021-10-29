@@ -137,13 +137,12 @@ class Goods extends Common
         $id = input('id');
         $m = model('goods');
         $goods = $m::get($id);
-        $brand = db('brand')->where('cid = ' . $goods->uid . ' or cid = 0')->where('isshow', 1)->select(); //品牌
-        $attr = db('GoodsAttr')->where('cid', $goods->uid)->order('sort, id')->select(); //商品属性
-        //        $attr = Db::query("select * from goodsattr as a,goods_attr as b where a.attr_id = b.id  and goods_id like ".$goods->id);    //属性
-        $spec = db('spec')->where('cid', $goods->uid)->order('sort, id')->select(); //商品规格
+        $brand = db('brand')->where('cid = ' . $goods->id . ' or cid = 0')->where('isshow', 1)->select(); //品牌
+        $attr = db('GoodsAttr')->where('cid', $goods->id)->order('cid, id')->select(); //商品属性
+        $spec = db('goods_spec')->where('id', $goods->id)->order('id, goods_id')->select(); //商品规格
         $ChinaCity = file_get_contents('./static/admin/ChinaCity/city_code.json'); //全国城区
         $goods_images = Db::name('goodsimages')->where('goodsid', $goods->id)->select(); //宝贝预览图片
-        $goods_spec_key = Db::name('goodsseec')->where('goods_id', $goods->id)->column("group_concat(`key` order by store_count desc separator ',')");
+        $goods_spec_key = Db::name('goods_spec')->where('goods_id', $goods->id)->column("group_concat(`key` order by store_count desc separator ',')");
         $goods_spec_key = explode(',', $goods_spec_key[0]);
         $attrs = $specs = [];
 
